@@ -28,15 +28,16 @@ local on_attach = function(client, bufnr)
 	bind("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 	bind("n", "<leader>gr", vim.lsp.buf.references, opts)
 	bind("n", "<leader>gd", vim.lsp.buf.definition, opts)
+	bind("n", "<leader>gdt", vim.lsp.buf.type_definition, opts)
 	bind("n", "<leader>gD", vim.lsp.buf.declaration, opts)
 	bind("n", "<leader>gi", vim.lsp.buf.implementation, opts)
+	bind("n", "<leader>gh", vim.lsp.buf.hover, opts)
 	bind("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
 	bind("i", "<C-h>", '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
 
 	bind('v', '<leader>F', vim.lsp.formatexpr, opts)
 end
-
 vim.diagnostic.config({
 	virtual_text = false,
 	signs = true,
@@ -55,12 +56,12 @@ vim.diagnostic.config({
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
 	vim.lsp.handlers.hover,
-	{border = 'rounded', focusable = false}
+	{ border = 'rounded', max_width = 80, focusable = false }
 )
 
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
 	vim.lsp.handlers.signature_help,
-	{border = 'rounded', focusable = false}
+	{ border = 'rounded', focusable = false }
 )
 
 vim.cmd([[
