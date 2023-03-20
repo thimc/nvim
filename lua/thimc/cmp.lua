@@ -18,6 +18,7 @@ cmp.setup({
 		{ name = 'luasnip' },
 		{ name = 'path' },
 		{ name = 'buffer' },
+		{ name = 'nvim_lua' },
 	},
 	window = {
 		documentation = vim.tbl_deep_extend(
