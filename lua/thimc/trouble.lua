@@ -18,4 +18,8 @@ if ok then
 		-- enabling this will use the signs defined in your lsp client
 		diagnostic_signs = false
 	}
+	local bind = vim.keymap.set
+	bind("n", "<leader>d", "<cmd>TroubleToggle document_diagnostics<CR>")
+	bind("n", "<leader>dw", "<cmd>TroubleToggle workspace_diagnostics<CR>")
+	bind("n", "<leader>dq", "<cmd>TroubleToggle quickfix<CR>")
 end

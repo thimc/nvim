@@ -11,7 +11,6 @@ command('LspWorkspaceRemove', function()
 	vim.lsp.buf.remove_workspace_folder()
 end, {desc = 'Remove folder from workspace'})
 
-
 -- Rebind some of the default keybindings
 local on_attach = function(client, bufnr)
 	local opts = {buffer = bufnr}
@@ -38,6 +37,7 @@ local on_attach = function(client, bufnr)
 
 	bind('v', '<leader>F', vim.lsp.formatexpr, opts)
 end
+
 vim.diagnostic.config({
 	virtual_text = false,
 	signs = true,
@@ -64,14 +64,15 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
 	{ border = 'rounded', focusable = false }
 )
 
+vim.opt.shortmess = vim.opt.shortmess + { c = true }
+
 vim.cmd([[
 " Show diagnostic message when hovering in NORMAL mode
-"autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+"autocmd CursorHold * silent! lua vim.diagnostic.open_float(nil, { focusable = false })
 
 " Show signature help when hovering in INSERT mode
-autocmd CursorHoldI * lua vim.lsp.buf.signature_help({ focusable = false })
+autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help({ focusable = false })
 ]])
-
 
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()

@@ -20,6 +20,8 @@ if ok then
 		local cmd = "!go run " ..  qargs
 		vim.cmd(cmd)
 	end
-
 	vim.cmd("command! -nargs=* GoRun lua GoRun(<f-args>)")
+
+	local bind = vim.keymap.set
+	bind('n', '<leader>xg', "<cmd>GoRun<CR>")
 end

@@ -104,3 +104,10 @@ cmp.setup.cmdline(':', {
 		{ name = 'cmdline' }
 	})
 })
+
+local ok, autohotkey = pcall(require, 'nvim-autohotkey')
+if ok then
+	cmp.setup.filetype({ 'autohotkey' }, {
+		sources = { { name = 'autohotkey' } },
+	})
+end

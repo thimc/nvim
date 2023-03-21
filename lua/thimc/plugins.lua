@@ -1,6 +1,7 @@
 -- Only required if you have packer configured as `opt`
 vim.cmd([[packadd packer.nvim]])
 
+
 return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim' -- Packer can manage itself
 
@@ -14,6 +15,7 @@ return require('packer').startup(function(use)
 
 	-- LSP Support
 	use { 'neovim/nvim-lspconfig' }
+	use { "folke/trouble.nvim" } -- Quickfix for LSP (bound to <leader>d/D)
 	-- Automatic LSP server handling
 	-- use { 'williamboman/mason.nvim' }
 	-- use { 'williamboman/mason-lspconfig.nvim' }
@@ -27,14 +29,19 @@ return require('packer').startup(function(use)
 	use { 'hrsh7th/cmp-nvim-lua' }
 	use { 'saadparwaiz1/cmp_luasnip' }
 
+	-- AutoHotKey
+	use { 'jose-elias-alvarez/null-ls.nvim' }
+	use { 'DasGandlaf/nvim-autohotkey' }
+
 	-- Snippets
 	use { 'L3MON4D3/LuaSnip' }
 	use { 'rafamadriz/friendly-snippets' }
 
-	use { 'folke/tokyonight.nvim' } -- theme
-	use { "folke/trouble.nvim" } -- Quickfix for LSP (bound to <leader>d/D)
 
-	use { 'ggandor/leap.nvim' } -- new way of searching using s and S
+	use { 'folke/tokyonight.nvim' } -- theme
+	use { 'kar9222/minimalist.nvim' }
+
+	use { 'ggandor/leap.nvim' } -- Better searching using s and S
 
 	use { 'olexsmir/gopher.nvim' } -- golang commands
 
