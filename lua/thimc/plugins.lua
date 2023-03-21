@@ -37,9 +37,7 @@ return require('packer').startup(function(use)
 	use { 'L3MON4D3/LuaSnip' }
 	use { 'rafamadriz/friendly-snippets' }
 
-
 	use { 'folke/tokyonight.nvim' } -- theme
-	use { 'kar9222/minimalist.nvim' }
 
 	use { 'ggandor/leap.nvim' } -- Better searching using s and S
 
