@@ -31,18 +31,32 @@ vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = "80"
 
--- all source code gets wrapped at <80 and auto-indented
+-- Filetype automation
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "lua,sh,c,cpp,go,java,javascript,html,make,perl,markdown,cvs,gitcommit,mail",
+	once = true,
+	callback = function()
+		vim.api.nvim_win_set_option(0, "colorcolumn", "80")
+		vim.api.nvim_buf_set_option(0, "textwidth", 80)
+		-- Enable spellcheck on the following file types
+		local spellfiletypes = { "markdown", "cvs", "gitcommit", "mail", "eml"}
+		for index, value in ipairs(spellfiletypes) do
+			if value == vim.bo.filetype then
+				vim.api.nvim_win_set_option(0, "spell", true)
+			end
+		end
+	end
+})
+
+-- Change directory to the current file when entering a buffer
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "*",
+	callback = function() vim.cmd([[silent! lcd %:p:h]]) end
+})
+
+
+-- Restore cursor position
 vim.cmd([[
-" Restore cursor position
 autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-
-" Filetype automation
-autocmd FileType lua,asm,c,cpp,go,java,javascript,html,make,perl setlocal tw=79 cc=79
-autocmd FileType markdown,cvs,gitcommit,mail,eml setlocal tw=79 cc=79 spell
-autocmd FileType sh compiler shellcheck
-
-" Add a help button in netrw
-autocmd FileType netrw nnoremap ? :help netrw-quickmap<CR>
 ]])

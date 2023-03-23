@@ -1,11 +1,9 @@
 -- Only required if you have packer configured as `opt`
 vim.cmd([[packadd packer.nvim]])
-
-
 return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim' -- Packer can manage itself
 
-	use { -- find files, buffers and help tags <leader>ff, fg, fb or fh.
+	use { -- Find files, buffers and help tags <leader>ff, fg, fb or fh.
 		'nvim-telescope/telescope.nvim', tag = '0.1.0',
 		requires = { { 'nvim-lua/plenary.nvim'} }
 	}
@@ -29,15 +27,12 @@ return require('packer').startup(function(use)
 	use { 'hrsh7th/cmp-nvim-lua' }
 	use { 'saadparwaiz1/cmp_luasnip' }
 
-	-- AutoHotKey
-	use { 'jose-elias-alvarez/null-ls.nvim' }
-	use { 'DasGandlaf/nvim-autohotkey' }
-
 	-- Snippets
 	use { 'L3MON4D3/LuaSnip' }
 	use { 'rafamadriz/friendly-snippets' }
 
-	use { 'folke/tokyonight.nvim' } -- theme
+	-- Theme
+	use { 'folke/tokyonight.nvim' }
 
 	use { 'ggandor/leap.nvim' } -- Better searching using s and S
 
@@ -50,6 +45,4 @@ return require('packer').startup(function(use)
 	use { 'tpope/vim-repeat' } -- repeats more actions and commands
 	use { 'tpope/vim-commentary' } -- comment motion (gc)
 	use { 'tpope/vim-eunuch' } -- UNIX commands from the command line
-
 end)
-

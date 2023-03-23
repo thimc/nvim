@@ -20,27 +20,17 @@ cmp.setup({
 		{ name = 'buffer' },
 		{ name = 'nvim_lua' },
 	},
-	window = {
-		documentation = vim.tbl_deep_extend(
-			'force',
-			cmp.config.window.bordered(),
-			{
-				max_height = 15,
-				max_width = 60,
-			}
-		)
-	},
 	formatting = {
 		fields = {'abbr', 'menu', 'kind'},
 		format = function(entry, item)
+
 			local short_name = {
 				nvim_lsp = 'LSP',
 				nvim_lua = 'nvim'
 			}
-
 			local menu_name = short_name[entry.source.name] or entry.source.name
-
 			item.menu = string.format('[%s]', menu_name)
+
 			return item
 		end,
 	},
@@ -104,10 +94,3 @@ cmp.setup.cmdline(':', {
 		{ name = 'cmdline' }
 	})
 })
-
-local ok, autohotkey = pcall(require, 'nvim-autohotkey')
-if ok then
-	cmp.setup.filetype({ 'autohotkey' }, {
-		sources = { { name = 'autohotkey' } },
-	})
-end

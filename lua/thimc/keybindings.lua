@@ -16,10 +16,6 @@ bind("n", "<leader>E", vim.cmd.Ex)
 bind("n", "<leader>e", vim.cmd.Lex)
 bind("n", "<leader>p", function() require('packer').sync() end)
 
--- quickfix navigation
-bind("n", "<C-k>", "<cmd>cnext<CR>zz")
-bind("n", "<C-j>", "<cmd>cprev<CR>zz")
-
 -- mail signatures
 bind('n', '<leader>s', "<cmd>r ~/documents/signature-english.txt<CR>")
 bind('n', '<leader>S', "<cmd>r ~/documents/signature-swedish.txt<CR>")
@@ -28,8 +24,8 @@ bind('n', '<leader>S', "<cmd>r ~/documents/signature-swedish.txt<CR>")
 bind('n', '<leader>se', "<cmd>spell spelllang=en_us<CR>")
 bind('n', '<leader>ss', "<cmd>spell spelllang=sv_SE<CR>")
 
-bind('n', '<leader>cc', "<cmd>setlocal tw=80 cc=80<CR>")
-bind('n', '<leader>ncc', "<cmd>setlocal tw-=80 cc-=80<CR>")
+bind('n', '<leader>cc', "<cmd>set tw=80<CR><cmd>set cc=80<CR>")
+bind('n', '<leader>ncc', "<cmd>set tw=0<CR><cmd>set cc-=80<CR>")
 
 -- colour higlight
 bind('n', '<leader>ch', "<cmd>ColorHighlight<CR>")
@@ -37,10 +33,15 @@ bind('n', '<leader>ch', "<cmd>ColorHighlight<CR>")
 -- reload current file
 bind('n', '<leader><leader>', "<cmd>so<CR>")
 
--- VIM-style make and compiler
-bind('n', '<leader>d', "<cmd>copen<CR>")
-bind('n', '<leader>c', "<cmd>compiler<space>")
-bind('n', '<leader>m', "<cmd>make<CR>")
-
 -- write as root
 vim.cmd([[ cnoremap w!! execute 'silent! write !doas tee % >/dev/null' ]])
+
+-- Press ? in netrw to get help
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "netrw",
+	once = true,
+	callback = function()
+		vim.keymap.set("n", "?", "<cmd>help netrw-quickmap<CR>")
+	end
+})
+
