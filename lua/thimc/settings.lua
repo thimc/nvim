@@ -14,6 +14,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 
+vim.opt.title = true
 vim.opt.showmode = true
 vim.opt.showcmd = true
 

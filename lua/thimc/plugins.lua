@@ -34,8 +34,6 @@ return require('packer').startup(function(use)
 	-- Theme
 	use { 'folke/tokyonight.nvim' }
 
-	use { 'ggandor/leap.nvim' } -- Better searching using s and S
-
 	use { 'olexsmir/gopher.nvim' } -- golang commands
 
 	use { 'chrisbra/Colorizer' } -- higlight colors (bound to <leader>ch)

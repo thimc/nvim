@@ -20,7 +20,7 @@ local on_attach = function(client, bufnr)
 		vim.lsp.buf.format()
 	end, {desc = 'Format buffer with language server'})
 
-	bind("n", "<leader>F", vim.lsp.buf.format, opts)
+	bind("n", "<leader>gf", vim.lsp.buf.format, opts)
 	bind("n", "<leader>D", vim.diagnostic.open_float, opts)
 	bind("n", "<leader>ds", vim.lsp.buf.document_symbol, opts)
 	bind("n", "<leader>ws", vim.lsp.buf.workspace_symbol, opts)
@@ -30,25 +30,25 @@ local on_attach = function(client, bufnr)
 	bind("n", "<leader>gdt", vim.lsp.buf.type_definition, opts)
 	bind("n", "<leader>gD", vim.lsp.buf.declaration, opts)
 	bind("n", "<leader>gi", vim.lsp.buf.implementation, opts)
-	bind("n", "<leader>gh", vim.lsp.buf.hover, opts)
+	bind("n", "<leader>k", vim.lsp.buf.hover, opts)
 	bind("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
 	bind("i", "<C-h>", '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
 
 	bind('v', '<leader>F', vim.lsp.formatexpr, opts)
+	print(bufnr)
 end
 
 
-vim.diagnostic.config({
-	virtual_text = false,
-	signs = true,
-	underline = true,
-	severity_sort = true,
-})
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+	vim.lsp.handlers.hover, { max_width = 80, focusable = false })
+
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+	vim.lsp.handlers.signature_help, { focusable = false })
 
 vim.cmd([[
 " Show diagnostic message when hovering in NORMAL mode
-"autocmd CursorHold * silent! lua vim.diagnostic.open_float(nil, { focusable = false })
+autocmd CursorHold * silent! lua vim.diagnostic.open_float(nil, { focusable = false })
 
 " Show signature help when hovering in INSERT mode
 autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help({ focusable = false })
@@ -62,5 +62,32 @@ require('lspconfig')['clangd'].setup {
 }
 require('lspconfig')['gopls'].setup {
 	on_attach = on_attach,
-	capabilities = capabilities
+	capabilities = capabilities,
+	-- settings = {
+	-- 	gopls = {
+	-- 		experimentalPostfixCompletions = true,
+	-- 		analyses = {
+	-- 			unusedparams = true,
+	-- 			shadow = true,
+	-- 		},
+	-- 		staticcheck = true,
+	-- 	},
+	-- },
+	-- init_options = {
+	-- 	usePlaceholders = true,
+	-- },
 }
+
+vim.diagnostic.config({
+	virtual_text = false,
+	signs = true,
+	underline = true,
+	severity_sort = true,
+})
+
+vim.api.nvim_create_autocmd('BufWritePre', {
+	pattern = '*.go',
+	callback = function()
+		vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+	end
+})
