@@ -20,7 +20,7 @@ local on_attach = function(client, bufnr)
 		vim.lsp.buf.format()
 	end, {desc = 'Format buffer with language server'})
 
-	bind("n", "<leader>gf", vim.lsp.buf.format, opts)
+	bind("n", "<leader>f", vim.lsp.buf.format, opts)
 	bind("n", "<leader>D", vim.diagnostic.open_float, opts)
 	bind("n", "<leader>ds", vim.lsp.buf.document_symbol, opts)
 	bind("n", "<leader>ws", vim.lsp.buf.workspace_symbol, opts)
