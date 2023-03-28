@@ -1,5 +1,4 @@
 -- Only required if you have packer configured as `opt`
-
 vim.cmd([[packadd packer.nvim]])
 return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim' -- Packer can manage itself
@@ -35,9 +34,7 @@ return require('packer').startup(function(use)
 	-- Theme
 	use { 'folke/tokyonight.nvim' }
 
-	-- use { 'olexsmir/gopher.nvim' } -- golang commands
-	use { 'ray-x/go.nvim' }
-	use { 'ray-x/guihua.lua' } -- recommended if need floating window support}
+	use { 'olexsmir/gopher.nvim' } -- golang commands
 
 	use { 'chrisbra/Colorizer' } -- higlight colors (bound to <leader>ch)
 
