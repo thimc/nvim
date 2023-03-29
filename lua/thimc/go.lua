@@ -39,8 +39,7 @@ if ok then
 	function GoRun(...)
 		local args = table.concat({...}, " ")
 		if args == "" then
-			args = vim.fn.expand('.')
-			-- args = vim.fn.expand('%')
+			args = vim.fn.expand('%')
 		end
 		local qargs = '"' .. args:gsub('"', '\\"') .. '"'
 		local cmd = "!go run " ..  qargs
@@ -48,5 +47,5 @@ if ok then
 	end
 	vim.cmd("command! -nargs=* GoRun lua GoRun(<f-args>)")
 
-	bind('n', '<leader>xg', "<cmd>GoRun<CR>")
+	bind('n', '<leader>xg', ":GoRun<space>.")
 end
