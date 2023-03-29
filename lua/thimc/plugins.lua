@@ -37,6 +37,13 @@ return require('packer').startup(function(use)
 	use { 'mfussenegger/nvim-dap' }
 	use { 'olexsmir/gopher.nvim' } -- golang commands
 
+	use {
+		'lewis6991/gitsigns.nvim',
+		config = function()
+			require('gitsigns').setup()
+		end
+	}
+
 	use { 'chrisbra/Colorizer' } -- higlight colors (bound to <leader>ch)
 
 	use { 'tpope/vim-surround' } -- surround motion (ysw" to surround a word)
