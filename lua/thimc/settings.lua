@@ -4,6 +4,8 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 vim.g.netrw_liststyle = 3
+vim.g.netrw_altv = true	-- open splits to the right
+vim.g.netrw_preview	 = true	-- preview split to the right
 
 vim.opt.mouse = "a"
 vim.opt.clipboard = "unnamedplus" -- Sync with system clipboard
