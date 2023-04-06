@@ -33,7 +33,9 @@ return require("packer").startup(function(use)
 	use { "rafamadriz/friendly-snippets" }
 
 	-- Theme
-	use { "folke/tokyonight.nvim" }
+	use { "erikbackman/aurora.vim" }
+	use { "nvim-lualine/lualine.nvim" }
+	-- use { "folke/tokyonight.nvim" }
 	-- use { "kvrohit/rasmus.nvim" }
 	-- use { "p00f/alabaster.nvim" }
 
