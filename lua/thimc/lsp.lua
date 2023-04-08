@@ -13,10 +13,9 @@ end, {desc = 'Remove folder from workspace'})
 
 -- Rebind some of the default keybindings
 local on_attach = function(client, bufnr)
-	local opts = {buffer = bufnr}
 	local bind = vim.keymap.set
-	local buf_command = vim.api.nvim_buf_create_user_command
-	buf_command(bufnr, 'LspFormat', function()
+	local opts = {buffer = bufnr}
+	vim.api.nvim_buf_create_user_command(bufnr, 'LspFormat', function()
 		vim.lsp.buf.format()
 	end, {desc = 'Format buffer with language server'})
 
@@ -38,7 +37,6 @@ local on_attach = function(client, bufnr)
 	bind('v', '<leader>F', vim.lsp.formatexpr, opts)
 	print(bufnr)
 end
-
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
 	vim.lsp.handlers.hover, { max_width = 80, focusable = false })
@@ -77,6 +75,22 @@ require('lspconfig')['gopls'].setup {
 	-- 	usePlaceholders = true,
 	-- },
 }
+
+local null_ls = require("null-ls")
+null_ls.setup({
+	on_attach = on_attach(client, 1),
+	sources = {
+		null_ls.builtins.code_actions.shellcheck,
+
+		null_ls.builtins.diagnostics.shellcheck,
+		null_ls.builtins.diagnostics.eslint,
+
+		null_ls.builtins.completion.spell,
+		null_ls.builtins.completion.tags,
+
+		null_ls.builtins.hover.dictionary,
+	},
+})
 
 vim.diagnostic.config({
 	virtual_text = false,
