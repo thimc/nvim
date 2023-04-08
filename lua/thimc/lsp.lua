@@ -35,7 +35,6 @@ local on_attach = function(client, bufnr)
 	bind("i", "<C-h>", '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
 
 	bind('v', '<leader>F', vim.lsp.formatexpr, opts)
-	print(bufnr)
 end
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
