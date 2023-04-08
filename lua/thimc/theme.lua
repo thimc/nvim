@@ -1,12 +1,11 @@
 vim.o.termguicolors = true
 
-vim.cmd([[colorscheme aurora
-
+vim.cmd([[
+colorscheme aurora
 highlight clear StatusLine
 highlight clear StatusLineNC
 highlight clear StatusLineTerm
 highlight clear StatusLineTermNC
-
 highlight Normal           guibg=NONE
 highlight SignColumn       guibg=NONE
 highlight Error            guibg=NONE
@@ -21,14 +20,6 @@ highlight StatusLineNC     guibg=#0C0F12 guifg=#e6e8ee
 highlight StatusLineTerm   guibg=#0D9C94 guifg=#e6e8ee
 highlight StatusLineTermNC guibg=#0D9C94 guifg=#22252b
 ]])
-
--- require("tokyonight").setup({
--- 	style = "night",
--- 	transparent = true,
--- 	terminal_colors = true,
--- })
--- vim.cmd([[colorscheme tokyonight-night]])
-
 
 -- highlight EOL white spaces in INSERT mode
 vim.cmd([[

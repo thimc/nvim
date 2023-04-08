@@ -34,12 +34,7 @@ return require("packer").startup(function(use)
 
 	-- Theme
 	use { "erikbackman/aurora.vim" }
-	use { "nvim-lualine/lualine.nvim" }
-	-- use { "folke/tokyonight.nvim" }
-	-- use { "kvrohit/rasmus.nvim" }
-	-- use { "p00f/alabaster.nvim" }
 
-	use { "aditya-azad/candle-grey" }
 
 	use { "mfussenegger/nvim-dap" }
 	use { "olexsmir/gopher.nvim" } -- golang commands
