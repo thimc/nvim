@@ -28,9 +28,9 @@ if ok then
 	vim.keymap.set('n', '<leader>qq',
 		'<cmd>TroubleToggle quickfix<CR>', opts)
 
-	vim.keymap.set('n', 'gr',
+	vim.keymap.set('n', 'qr',
 		'<cmd>TroubleToggle lsp_references<CR>', opts)
 
-	vim.keymap.set('n', 'gd',
+	vim.keymap.set('n', 'qd',
 		'<cmd>TroubleToggle lsp_definitions<CR>', opts)
 end

@@ -8,6 +8,13 @@ return require("packer").startup(function(use)
 		requires = { { "nvim-lua/plenary.nvim"} }
 	}
 
+	use { -- Git signs in the signcolumn
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end
+	}
+
 	-- Better syntax highlighting
 	use({"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"})
 
@@ -34,17 +41,11 @@ return require("packer").startup(function(use)
 
 	-- Theme
 	use { "erikbackman/aurora.vim" }
-
+	use { "tjdevries/colorbuddy.nvim" }
+	use { "bbenzikry/snazzybuddy.nvim" }
 
 	use { "mfussenegger/nvim-dap" }
 	use { "olexsmir/gopher.nvim" } -- golang commands
-
-	use {
-		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("gitsigns").setup()
-		end
-	}
 
 	use { "chrisbra/Colorizer" } -- higlight colors (bound to <leader>ch)
 
