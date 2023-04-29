@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "netrw",
 	once = true,
 	callback = function()
-		vim.keymap.set("n", "?", "<cmd>help netrw-quickmap<CR>")
+		bind("n", "?", "<cmd>help netrw-quickmap<CR>")
 	end
 })
 

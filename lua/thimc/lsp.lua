@@ -1,16 +1,16 @@
--- local command = vim.api.nvim_create_user_command
--- command('LspWorkspaceAdd', function()
--- 	vim.lsp.buf.add_workspace_folder()
--- end, {desc = 'Add folder to workspace'})
--- command('LspWorkspaceList', function()
--- 	vim.notify(vim.inspect(vim.lsp.buf.list_workspace_folders()))
--- end, {desc = 'List workspace folders'})
--- command('LspWorkspaceRemove', function()
--- 	vim.lsp.buf.remove_workspace_folder()
--- end, {desc = 'Remove folder from workspace'})
--- command('LspFormat', function()
--- 	vim.lsp.buf.format()
--- end, {desc = 'Format buffer with language server'})
+local command = vim.api.nvim_create_user_command
+command('LspWorkspaceAdd', function()
+	vim.lsp.buf.add_workspace_folder()
+end, {desc = 'Add folder to workspace'})
+command('LspWorkspaceList', function()
+	vim.notify(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+end, {desc = 'List workspace folders'})
+command('LspWorkspaceRemove', function()
+	vim.lsp.buf.remove_workspace_folder()
+end, {desc = 'Remove folder from workspace'})
+command('LspFormat', function()
+	vim.lsp.buf.format()
+end, {desc = 'Format buffer with language server'})
 
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -20,42 +20,42 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		-- Enable completion triggered by <c-x><c-o>
 		vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-		vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-		vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-		vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+		bind("n", "gr", vim.lsp.buf.references, opts)
+		bind('n', 'gi', vim.lsp.buf.implementation, opts)
+		bind('n', 'gd', vim.lsp.buf.definition, opts)
+		bind('n', 'gD', vim.lsp.buf.declaration, opts)
 
-		vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
-		vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+		bind('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+		bind('n', '<leader>rn', vim.lsp.buf.rename, opts)
 
-		vim.keymap.set({'n','v'}, "<leader>ca", vim.lsp.buf.code_action, opts)
-		vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, opts)
+		bind({'n','v'}, "<leader>ca", vim.lsp.buf.code_action, opts)
+		bind('n', '<leader>f', vim.lsp.buf.format, opts)
 
 		-- Symbols
-		vim.keymap.set('n', '<leader>ds', vim.lsp.buf.document_symbol, opts)
-		vim.keymap.set('n', '<leader>ws', vim.lsp.buf.workspace_symbol, opts)
+		bind('n', '<leader>ds', vim.lsp.buf.document_symbol, opts)
+		bind('n', '<leader>ws', vim.lsp.buf.workspace_symbol, opts)
 
 		-- Diagnostics
-		-- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
-		-- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-		-- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-		-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+		-- bind('n', '<leader>e', vim.diagnostic.open_float, opts)
+		-- bind('n', '[d', vim.diagnostic.goto_prev, opts)
+		-- bind('n', ']d', vim.diagnostic.goto_next, opts)
+		-- bind('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
 		-- Help
-		vim.keymap.set('n', '<leader>k', vim.lsp.buf.hover, opts)
-		vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+		bind('n', '<leader>k', vim.lsp.buf.hover, opts)
+		bind('n', '<C-k>', vim.lsp.buf.signature_help, opts)
 
 		-- Workspace
-		vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-		vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-		vim.keymap.set('n', '<space>wl', function()
+		bind('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+		bind('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+		bind('n', '<space>wl', function()
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end, opts)
 	end,
 })
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-	vim.lsp.handlers.hover, { max_width = 80, focusable = false })
+-- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+-- 	vim.lsp.handlers.hover, { max_width = 80, focusable = false })
 
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
 	vim.lsp.handlers.signature_help, { focusable = false })
@@ -93,16 +93,3 @@ lspconfig.clangd.setup {
 lspconfig.gopls.setup {
 	capabilities = capabilities,
 }
-
---local null_ls = require("null-ls")
---null_ls.setup({
-----	on_attach = on_attach(client, 1),
---	sources = {
---		null_ls.builtins.code_actions.shellcheck,
---		null_ls.builtins.diagnostics.shellcheck,
---		null_ls.builtins.diagnostics.eslint,
---		null_ls.builtins.completion.spell,
---		null_ls.builtins.completion.tags,
---		null_ls.builtins.hover.dictionary,
---	},
---})

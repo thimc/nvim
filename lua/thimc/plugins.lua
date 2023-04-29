@@ -24,7 +24,6 @@ return require("packer").startup(function(use)
 	-- Automatic LSP server handling
 	-- use { "williamboman/mason.nvim" }
 	-- use { "williamboman/mason-lspconfig.nvim" }
-	use { "jose-elias-alvarez/null-ls.nvim" } -- use neovim as a langauge server
 
 	-- Autocompletion
 	use { "hrsh7th/nvim-cmp" }
@@ -40,9 +39,8 @@ return require("packer").startup(function(use)
 	use { "rafamadriz/friendly-snippets" }
 
 	-- Theme
-	use { "erikbackman/aurora.vim" }
-	use { "tjdevries/colorbuddy.nvim" }
-	use { "bbenzikry/snazzybuddy.nvim" }
+	use { "bbenzikry/snazzybuddy.nvim",  requires = { "tjdevries/colorbuddy.nvim" } }
+	-- use { "erikbackman/aurora.vim" }
 
 	use { "mfussenegger/nvim-dap" }
 	use { "olexsmir/gopher.nvim" } -- golang commands

@@ -1,4 +1,5 @@
 -- settings without a patched font or icons
+local bind = vim.keymap.set
 local ok, trouble = pcall(require, 'trouble')
 
 if ok then
@@ -19,18 +20,18 @@ if ok then
 		diagnostic_signs = false
 	}
 	local opts = {silent=true, noremap=true}
-	vim.keymap.set('n', '<leader>q',
+	bind('n', '<leader>q',
 		'<cmd>TroubleToggle document_diagnostics<CR>', opts)
 
-	vim.keymap.set('n', '<leader>qw',
+	bind('n', '<leader>qw',
 		'<cmd>TroubleToggle workspace_diagnostics<CR>', opts)
 
-	vim.keymap.set('n', '<leader>qq',
+	bind('n', '<leader>qq',
 		'<cmd>TroubleToggle quickfix<CR>', opts)
 
-	vim.keymap.set('n', 'qr',
+	bind('n', 'qr',
 		'<cmd>TroubleToggle lsp_references<CR>', opts)
 
-	vim.keymap.set('n', 'qd',
+	bind('n', 'qd',
 		'<cmd>TroubleToggle lsp_definitions<CR>', opts)
 end
