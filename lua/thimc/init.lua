@@ -1,3 +1,6 @@
+require("thimc.settings")
+require("thimc.keybindings")
+
 -- Only required if you have packer configured as `opt`
 vim.cmd([[packadd packer.nvim]])
 return require("packer").startup(function(use)
@@ -45,6 +48,9 @@ return require("packer").startup(function(use)
 	use { "mfussenegger/nvim-dap" }
 	use { "olexsmir/gopher.nvim" } -- golang commands
 
+
+	use { "mbbill/undotree" }
+
 	use { "chrisbra/Colorizer" } -- higlight colors (bound to <leader>ch)
 
 	use { "tpope/vim-surround" } -- surround motion (ysw" to surround a word)
@@ -53,3 +59,5 @@ return require("packer").startup(function(use)
 	use { "tpope/vim-commentary" } -- comment motion (gc)
 	use { "tpope/vim-eunuch" } -- UNIX commands from the command line
 end)
+
+
