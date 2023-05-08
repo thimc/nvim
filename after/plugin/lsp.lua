@@ -12,7 +12,7 @@ local lsp = require('lsp-zero').preset({
 lsp.on_attach(function(client, bufnr)
 	-- lsp.default_keymaps({buffer = bufnr})
 
-	-- Format buffer on save
+	-- Automatically format the buffer on save if an LSP is attached
 	lsp.buffer_autoformat()
 
 	local bind = vim.keymap.set
@@ -36,7 +36,7 @@ lsp.on_attach(function(client, bufnr)
 	bind('n', '<leader>e', vim.diagnostic.open_float, opts)
 	bind('n', '[d', vim.diagnostic.goto_prev, opts)
 	bind('n', ']d', vim.diagnostic.goto_next, opts)
-	-- bind('n', '<leader>q', vim.diagnostic.setloclist, opts)
+	bind('n', '<leader>Q', vim.diagnostic.setloclist, opts)
 
 	-- Help
 	bind('n', '<leader>k', vim.lsp.buf.hover, opts)
@@ -47,9 +47,6 @@ lsp.on_attach(function(client, bufnr)
 	bind('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
 	bind('n', '<space>wl', ':LspWorkspaceList<CR>', opts)
 end)
-
--- (Optional) Configure lua language server for neovim
--- require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
 lsp.set_sign_icons({
 	error = 'E',
@@ -62,17 +59,17 @@ lsp.setup()
 
 vim.diagnostic.config({
 	virtual_text = false,
-	signs = true,
-	underline = true,
 	severity_sort = true,
+	underline = true,
+	signs = true,
 })
 
 vim.cmd([[
 " Show diagnostic message when hovering in NORMAL mode
-autocmd CursorHold * silent! lua vim.diagnostic.open_float(nil, { focusable = false })
+autocmd CursorHold * silent! lua vim.diagnostic.open_float(nil, {focusable = false})
 
 " Show signature help when hovering in INSERT mode
-autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help({ focusable = false })
+autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help({focusable = false})
 ]])
 
 -- Make sure you setup `cmp` after lsp-zero
@@ -103,20 +100,16 @@ cmp.setup({
 	}
 })
 
-cmp.setup.cmdline({ '/', '?' }, {
+cmp.setup.cmdline({'/', '?'}, {
 	mapping = cmp.mapping.preset.cmdline(),
-	sources = {
-		{ name = 'buffer' }
-	}
+	sources = { {name = 'buffer'} }
 })
 
 cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
-		{ name = 'path' }
+		{name = 'path'}
 	}, {
-		{ name = 'cmdline' }
+		{name = 'cmdline'}
 	})
 })
-
-
