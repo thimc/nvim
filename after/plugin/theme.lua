@@ -14,7 +14,7 @@ if ok then
 	]])
 end
 
--- highlight EOL white spaces in INSERT mode
+-- highlight EOL white spaces after leaving INSERT mode
 vim.cmd([[
 highlight ExtraWhitespace ctermbg=red ctermfg=NONE guibg=#ff5c57 guifg=NONE
 autocmd InsertLeave * match ExtraWhitespace /\s\+\%#\@<!$/
