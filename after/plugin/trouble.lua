@@ -1,6 +1,5 @@
--- settings without a patched font or icons
-local opts = { silent=true, noremap=true }
 local bind = vim.keymap.set
+local opts = {noremap = true}
 
 require("trouble").setup {
 	icons = false,
@@ -20,5 +19,5 @@ bind('n', '<leader>q', '<cmd>TroubleToggle document_diagnostics<CR>', opts)
 bind('n', '<leader>qw', '<cmd>TroubleToggle workspace_diagnostics<CR>', opts)
 bind('n', '<leader>qq', '<cmd>TroubleToggle quickfix<CR>', opts)
 
-bind('n', 'qr', '<cmd>TroubleToggle lsp_references<CR>', opts)
-bind('n', 'qd', '<cmd>TroubleToggle lsp_definitions<CR>', opts)
+bind('n', '<leader>qr', '<cmd>TroubleToggle lsp_references<CR>', opts)
+bind('n', '<leader>qd', '<cmd>TroubleToggle lsp_definitions<CR>', opts)
