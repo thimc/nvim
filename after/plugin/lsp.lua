@@ -10,12 +10,8 @@ local lsp = require('lsp-zero').preset({
 })
 
 lsp.on_attach(function(client, bufnr)
-	-- lsp.default_keymaps({buffer = bufnr})
-
-	-- Automatically format the buffer on save if an LSP is attached
-	lsp.buffer_autoformat()
-
 	local bind = vim.keymap.set
+	local opts = {noremap=true, buffer=bufnr}
 
 	bind("n", "gr", vim.lsp.buf.references, opts)
 	bind('n', 'gi', vim.lsp.buf.implementation, opts)
@@ -43,9 +39,23 @@ lsp.on_attach(function(client, bufnr)
 	bind({'n','i'}, '<C-k>', vim.lsp.buf.signature_help, opts)
 
 	-- Workspace
-	bind('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-	bind('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-	bind('n', '<space>wl', ':LspWorkspaceList<CR>', opts)
+	bind('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
+	bind('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
+	bind('n', '<leader>wl', ':LspWorkspaceList<CR>', opts)
+
+	-- Show diagnostic message when hovering in NORMAL mode
+	vim.api.nvim_create_autocmd("CursorHold", {
+		buffer = bufnr,
+		callback = function()
+			local fopts = {
+				focusable = false,
+				source = 'always',
+				scope = 'cursor',
+				prefix = ' ',
+			}
+			vim.diagnostic.open_float(nil, fopts)
+		end,
+	})
 end)
 
 lsp.set_sign_icons({
@@ -64,13 +74,25 @@ vim.diagnostic.config({
 	signs = true,
 })
 
-vim.cmd([[
-" Show diagnostic message when hovering in NORMAL mode
-autocmd CursorHold * silent! lua vim.diagnostic.open_float(nil, {focusable = false})
+lsp.format_on_save({
+	format_opts = {
+		timeout_ms = 10000,
+	},
+	servers = {
+		['null-ls'] = {'go', 'c'}
+	},
+})
 
-" Show signature help when hovering in INSERT mode
-autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help({focusable = false})
-]])
+local null_ls = require("null-ls")
+null_ls.setup({
+	sources = {
+		null_ls.builtins.formatting.gofumpt,
+		null_ls.builtins.formatting.goimports_reviser,
+		null_ls.builtins.formatting.golines,
+		null_ls.builtins.code_actions.shellcheck,
+		null_ls.builtins.completion.luasnip,
+	},
+})
 
 -- Make sure you setup `cmp` after lsp-zero
 
