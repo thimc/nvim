@@ -21,7 +21,9 @@ return require('packer').startup(function(use)
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		run = function()
-			local ts_update = require('nvim-treesitter.install').update({with_sync = true})
+			local ts_update = require('nvim-treesitter.install').update({
+				with_sync = true
+			})
 			ts_update()
 		end,
 	}
@@ -48,20 +50,16 @@ return require('packer').startup(function(use)
 			-- Snippets
 			{'L3MON4D3/LuaSnip'},
 			{'rafamadriz/friendly-snippets'},
+
+			-- Diagnostics
+			{'folke/trouble.nvim'},
+
+			-- Go
+			{'olexsmir/gopher.nvim'},
 		},
 	}
 
-	use {'folke/trouble.nvim'}
-
-	-- Theme
-	use {
-		'bbenzikry/snazzybuddy.nvim',
-		requires = {'tjdevries/colorbuddy.nvim'}
-	}
-	-- use {'erikbackman/aurora.vim'}
-
-	use {'olexsmir/gopher.nvim'}
-
+	use { 'ellisonleao/gruvbox.nvim'  }
 	use {'mbbill/undotree'}
 	use {'chrisbra/Colorizer'}
 

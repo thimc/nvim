@@ -34,23 +34,8 @@ vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.signcolumn = "yes"
-
--- Filetype automation
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "lua,sh,c,cpp,go,java,javascript,html,make,perl,markdown,cvs,gitcommit,mail",
-	once = true,
-	callback = function()
-		vim.api.nvim_win_set_option(0, "colorcolumn", "80")
-		vim.api.nvim_buf_set_option(0, "textwidth", 80)
-		-- Enable spellcheck on the following file types
-		local spellfiletypes = { "markdown", "cvs", "gitcommit", "mail", "eml"}
-		for index, value in ipairs(spellfiletypes) do
-			if value == vim.bo.filetype then
-				vim.api.nvim_win_set_option(0, "spell", true)
-			end
-		end
-	end
-})
+vim.opt.colorcolumn = "80"
+vim.opt.textwidth = 80
 
 -- Change directory to the current file when entering a buffer
 vim.api.nvim_create_autocmd("BufEnter", {
@@ -58,8 +43,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function() vim.cmd([[silent! lcd %:p:h]]) end
 })
 
-
 -- Restore cursor position
 vim.cmd([[
-autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+	autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && 
+	\	line("'\"") <= line("$") | exe "normal! g`\"" | endif
 ]])

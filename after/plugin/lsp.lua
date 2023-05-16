@@ -1,10 +1,3 @@
-local command = vim.api.nvim_create_user_command
-command('LspWorkspaceAdd', function() vim.lsp.buf.add_workspace_folder() end, {desc = 'Add folder to workspace'})
-command('LspWorkspaceList', function() vim.notify(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, {desc = 'List workspace folders'})
-command('LspWorkspaceRemove', function() vim.lsp.buf.remove_workspace_folder() end, {desc = 'Remove folder from workspace'})
-command('LspWorkspaceList', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, {desc = 'Lists all folders for the workspace'})
-command('LspFormat', function() vim.lsp.buf.format() end, {desc = 'Format buffer with language server'})
-
 local lsp = require('lsp-zero').preset({
 	float_border = 'none',
 })
@@ -17,19 +10,13 @@ lsp.on_attach(function(client, bufnr)
 	bind('n', 'gi', vim.lsp.buf.implementation, opts)
 	bind('n', 'gd', vim.lsp.buf.definition, opts)
 	bind('n', 'gD', vim.lsp.buf.declaration, opts)
-
-	bind('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+	bind('n', '<leader>d', vim.lsp.buf.type_definition, opts)
 	bind('n', '<leader>rn', vim.lsp.buf.rename, opts)
-
 	bind({'n','v'}, "<leader>ca", vim.lsp.buf.code_action, opts)
 	bind('n', '<leader>f', vim.lsp.buf.format, opts)
 
-	-- Symbols
-	bind('n', '<leader>ds', vim.lsp.buf.document_symbol, opts)
-	bind('n', '<leader>ws', vim.lsp.buf.workspace_symbol, opts)
-
 	-- Diagnostics
-	bind('n', '<leader>e', vim.diagnostic.open_float, opts)
+	-- bind('n', '<leader>e', vim.diagnostic.open_float, opts)
 	bind('n', '[d', vim.diagnostic.goto_prev, opts)
 	bind('n', ']d', vim.diagnostic.goto_next, opts)
 	bind('n', '<leader>Q', vim.diagnostic.setloclist, opts)
@@ -37,25 +24,6 @@ lsp.on_attach(function(client, bufnr)
 	-- Help
 	bind('n', '<leader>k', vim.lsp.buf.hover, opts)
 	bind({'n','i'}, '<C-k>', vim.lsp.buf.signature_help, opts)
-
-	-- Workspace
-	bind('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
-	bind('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
-	bind('n', '<leader>wl', ':LspWorkspaceList<CR>', opts)
-
-	-- Show diagnostic message when hovering in NORMAL mode
-	vim.api.nvim_create_autocmd("CursorHold", {
-		buffer = bufnr,
-		callback = function()
-			local fopts = {
-				focusable = false,
-				source = 'always',
-				scope = 'cursor',
-				prefix = ' ',
-			}
-			vim.diagnostic.open_float(nil, fopts)
-		end,
-	})
 end)
 
 lsp.set_sign_icons({
@@ -68,7 +36,7 @@ lsp.set_sign_icons({
 lsp.setup()
 
 vim.diagnostic.config({
-	virtual_text = false,
+	-- virtual_text = false,
 	severity_sort = true,
 	underline = true,
 	signs = true,
@@ -79,7 +47,7 @@ lsp.format_on_save({
 		timeout_ms = 10000,
 	},
 	servers = {
-		['null-ls'] = {'go', 'c'}
+		['null-ls'] = {'go'}
 	},
 })
 
