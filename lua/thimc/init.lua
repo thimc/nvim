@@ -60,6 +60,7 @@ return require('packer').startup(function(use)
 	}
 
 	use { 'ellisonleao/gruvbox.nvim'  }
+	use {'ellisonleao/gruvbox.nvim'}
 	use {'mbbill/undotree'}
 	use {'chrisbra/Colorizer'}
 

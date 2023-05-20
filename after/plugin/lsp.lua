@@ -16,7 +16,7 @@ lsp.on_attach(function(client, bufnr)
 	bind('n', '<leader>f', vim.lsp.buf.format, opts)
 
 	-- Diagnostics
-	-- bind('n', '<leader>e', vim.diagnostic.open_float, opts)
+	bind('n', '<leader>e', vim.diagnostic.open_float, opts)
 	bind('n', '[d', vim.diagnostic.goto_prev, opts)
 	bind('n', ']d', vim.diagnostic.goto_next, opts)
 	bind('n', '<leader>Q', vim.diagnostic.setloclist, opts)
@@ -36,7 +36,7 @@ lsp.set_sign_icons({
 lsp.setup()
 
 vim.diagnostic.config({
-	-- virtual_text = false,
+	virtual_text = false,
 	severity_sort = true,
 	underline = true,
 	signs = true,

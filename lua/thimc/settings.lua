@@ -1,5 +1,3 @@
-vim.opt.relativenumber = true
-
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
@@ -30,9 +28,7 @@ vim.opt.updatetime = 50
 vim.opt.wrap = false
 vim.opt.timeoutlen = 300
 
-vim.opt.hlsearch = true
-vim.opt.incsearch = true
-
+vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "80"
 vim.opt.textwidth = 80
@@ -40,11 +36,17 @@ vim.opt.textwidth = 80
 -- Change directory to the current file when entering a buffer
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = "*",
-	callback = function() vim.cmd([[silent! lcd %:p:h]]) end
+	callback = function() vim.cmd("silent! lcd %:p:h") end
 })
 
 -- Restore cursor position
 vim.cmd([[
-	autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && 
-	\	line("'\"") <= line("$") | exe "normal! g`\"" | endif
+	autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' &&
+	\ line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 ]])
+
+-- Enable spellcheck for markdown files, git/cvs commits and mails
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown,cvs,gitcommit,mail",
+	callback = function() vim.api.nvim_win_set_option(0, "spell", true) end
+})

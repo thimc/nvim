@@ -31,8 +31,11 @@ bind('n', '<leader>ss', "<cmd>spell spelllang=sv_SE<CR>")
 -- higlight colours
 bind('n', '<leader>ch', "<cmd>ColorHighlight<CR>")
 
+-- press <Esc> to exit out of insert in terminal mode
+bind('t', '<Esc>', "<C-\\><C-n>")
+
 -- write as root
-vim.cmd("cnoremap w!! execute 'silent! write !doas tee % >/dev/null'")
+bind('c', 'w!!', "execute 'silent! write !doas tee % >/dev/null'")
 
 -- Press ? in netrw to get help
 vim.api.nvim_create_autocmd("FileType", {
