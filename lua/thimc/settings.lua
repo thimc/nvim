@@ -39,6 +39,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function() vim.cmd("silent! lcd %:p:h") end
 })
 
+vim.api.nvim_create_autocmd("TermOpen", {
+	callback = function()
+		vim.api.nvim_win_set_option(0, "number", false)
+		vim.api.nvim_win_set_option(0, "relativenumber", false)
+		vim.api.nvim_win_set_option(0, "signcolumn", "no")
+	end
+})
+
 -- Restore cursor position
 vim.cmd([[
 	autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' &&

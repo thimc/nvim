@@ -59,8 +59,9 @@ return require('packer').startup(function(use)
 		},
 	}
 
-	use { 'ellisonleao/gruvbox.nvim'  }
 	use {'ellisonleao/gruvbox.nvim'}
+	use {'CreaturePhil/vim-handmade-hero'}
+
 	use {'mbbill/undotree'}
 	use {'chrisbra/Colorizer'}
 
@@ -70,5 +71,4 @@ return require('packer').startup(function(use)
 	use {'tpope/vim-commentary'}
 	use {'tpope/vim-eunuch'}
 end)
-
 
