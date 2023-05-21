@@ -41,6 +41,9 @@ bind('c', 'w!!', "execute 'silent! write !doas tee % >/dev/null'")
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "netrw",
 	once = true,
-	callback = function() bind("n", "?", "<cmd>help netrw-quickmap<CR>") end
+	callback = function()
+		bind("n", "?", "<cmd>help netrw-quickmap<CR>")
+		bind("n", "<Esc><Esc>", "<cmd>bnext<CR>")
+	end
 })
 

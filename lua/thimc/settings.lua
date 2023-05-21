@@ -35,15 +35,24 @@ vim.opt.textwidth = 80
 
 -- Change directory to the current file when entering a buffer
 vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = "*",
-	callback = function() vim.cmd("silent! lcd %:p:h") end
+	callback = function()
+		vim.cmd("silent! lcd %:p:h")
+	end
 })
 
+-- Remove line numbers and sign column in terminal mode
 vim.api.nvim_create_autocmd("TermOpen", {
 	callback = function()
 		vim.api.nvim_win_set_option(0, "number", false)
 		vim.api.nvim_win_set_option(0, "relativenumber", false)
 		vim.api.nvim_win_set_option(0, "signcolumn", "no")
+	end
+})
+
+vim.api.nvim_create_autocmd("Filetype", {
+	pattern = "netrw",
+	callback = function()
+		vim.api.nvim_set_option_value("colorcolumn", 0, {})
 	end
 })
 
@@ -56,5 +65,7 @@ vim.cmd([[
 -- Enable spellcheck for markdown files, git/cvs commits and mails
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown,cvs,gitcommit,mail",
-	callback = function() vim.api.nvim_win_set_option(0, "spell", true) end
+	callback = function()
+		vim.api.nvim_win_set_option(0, "spell", true)
+	end
 })
