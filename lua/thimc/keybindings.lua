@@ -8,8 +8,7 @@ bind("v", "K", "<cmd>m '<-2<CR>gv=gv")
 -- J but keep the cursor where it was
 bind("n", "J", "mzJ`z")
 
--- split terminal or window
-bind("n", "<leader>t", ":belowright split<CR>:terminal<CR>i")
+-- split window and set focus
 bind("n", "<leader>v", "<C-w>v<C-w>l")
 
 -- Tree explorer, basically nvimtree
