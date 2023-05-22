@@ -103,3 +103,5 @@ cmp.setup.cmdline(':', {
 		{name = 'cmdline'}
 	})
 })
+
+require("lspconfig").clangd.setup {}
