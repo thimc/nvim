@@ -1,29 +1,21 @@
-local lsp = require('lsp-zero').preset({
-	float_border = 'none',
-})
+local lsp = require("lsp-zero").preset({})
+
+if vim.loop.os_uname().sysname == "Linux" then
+	lsp.ensure_installed({
+		"clangd",
+		"gopls",
+		"lua-language-server",
+	})
+	require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+end
 
 lsp.on_attach(function(client, bufnr)
 	local bind = vim.keymap.set
 	local opts = {noremap=true, buffer=bufnr}
-
-	bind("n", "gr", vim.lsp.buf.references, opts)
-	bind('n', 'gi', vim.lsp.buf.implementation, opts)
-	bind('n', 'gd', vim.lsp.buf.definition, opts)
-	bind('n', 'gD', vim.lsp.buf.declaration, opts)
-	bind('n', '<leader>d', vim.lsp.buf.type_definition, opts)
-	bind('n', '<leader>rn', vim.lsp.buf.rename, opts)
-	bind({'n','v'}, "<leader>ca", vim.lsp.buf.code_action, opts)
-	bind('n', '<leader>f', vim.lsp.buf.format, opts)
-
-	-- Diagnostics
-	bind('n', '<leader>e', vim.diagnostic.open_float, opts)
-	bind('n', '[d', vim.diagnostic.goto_prev, opts)
-	bind('n', ']d', vim.diagnostic.goto_next, opts)
-	bind('n', '<leader>Q', vim.diagnostic.setloclist, opts)
-
-	-- Help
-	bind('n', '<leader>k', vim.lsp.buf.hover, opts)
-	bind({'n','i'}, '<C-k>', vim.lsp.buf.signature_help, opts)
+	lsp.default_keymaps(opts)
+	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+	vim.keymap.set('n', "<leader>ca", vim.lsp.buf.code_action, opts)
+	vim.keymap.set({'n','i'}, '<C-k>', vim.lsp.buf.signature_help, opts)
 end)
 
 lsp.set_sign_icons({
@@ -36,10 +28,10 @@ lsp.set_sign_icons({
 lsp.setup()
 
 vim.diagnostic.config({
-	virtual_text = false,
-	severity_sort = true,
-	underline = true,
 	signs = true,
+	virtual_text = false,
+	underline = false,
+	severity_sort = true,
 })
 
 lsp.format_on_save({
