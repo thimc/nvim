@@ -1,5 +1,10 @@
 # neovim configuration
 
+```shell
+git clone https://github.com/thimc/nvim\
+    ~/.config/nvim
+```
+
 Install packer.nvim:
 
 ```shell
@@ -17,3 +22,7 @@ go install github.com/go-delve/delve/cmd/dlv@latest
 ```
 
 Start neovim and run `:PackerSync`.
+
+
+
+[Keybindings](https://github.com/thimc/nvim/keybindings.md).

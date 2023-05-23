@@ -10,7 +10,6 @@ if vim.loop.os_uname().sysname == "Linux" then
 end
 
 lsp.on_attach(function(client, bufnr)
-	local bind = vim.keymap.set
 	local opts = {noremap=true, buffer=bufnr}
 	lsp.default_keymaps(opts)
 	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)

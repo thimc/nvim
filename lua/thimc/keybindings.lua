@@ -1,48 +1,47 @@
 vim.g.mapleader = " "
-local bind = vim.keymap.set
 
 -- move text when highlighted
-bind("v", "J", "<cmd>m '>+1<CR>gv=gv")
-bind("v", "K", "<cmd>m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", "<cmd>m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", "<cmd>m '<-2<CR>gv=gv")
 
 -- J but keep the cursor where it was
-bind("n", "J", "mzJ`z")
+vim.keymap.set("n", "J", "mzJ`z")
 
 -- split window and set focus
-bind("n", "<leader>v", "<C-w>v<C-w>l")
+vim.keymap.set("n", "<leader>v", "<C-w>v<C-w>l")
 
 -- Tree explorer, basically nvimtree
-bind("n", "<leader>x", vim.cmd.Lex)
-bind("n", "<leader>X", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>x", vim.cmd.Lex)
+vim.keymap.set("n", "<leader>X", vim.cmd.Ex)
 
 -- Searching but keep the mouse in the middle of the screen
-bind("n", "n", "nzzzv")
-bind("n", "N", "Nzzzv")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
 
 -- mail signatures
-bind('n', '<leader>s', "<cmd>r ~/documents/signature-english.txt<CR>")
-bind('n', '<leader>S', "<cmd>r ~/documents/signature-swedish.txt<CR>")
+vim.keymap.set('n', '<leader>s', "<cmd>r ~/documents/signature-english.txt<CR>")
+vim.keymap.set('n', '<leader>S', "<cmd>r ~/documents/signature-swedish.txt<CR>")
 
 -- spell checks
-bind('n', '<leader>se', "<cmd>spell spelllang=en_us<CR>")
-bind('n', '<leader>ss', "<cmd>spell spelllang=sv_SE<CR>")
+vim.keymap.set('n', '<leader>se', "<cmd>spell spelllang=en_us<CR>")
+vim.keymap.set('n', '<leader>ss', "<cmd>spell spelllang=sv_SE<CR>")
 
 -- higlight colours
-bind('n', '<leader>ch', "<cmd>ColorHighlight<CR>")
+vim.keymap.set('n', '<leader>ch', "<cmd>ColorHighlight<CR>")
 
 -- press <Esc> to exit out of insert in terminal mode
-bind('t', '<Esc>', "<C-\\><C-n>")
+vim.keymap.set('t', '<Esc>', "<C-\\><C-n>")
 
 -- write as root
-bind('c', 'w!!', "execute 'silent! write !doas tee % >/dev/null'")
+vim.keymap.set('c', 'w!!', "execute 'silent! write !doas tee % >/dev/null'")
 
 -- Press ? in netrw to get help
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "netrw",
 	once = true,
 	callback = function()
-		bind("n", "?", "<cmd>help netrw-quickmap<CR>")
-		bind("n", "<Esc><Esc>", "<cmd>bnext<CR>")
+		vim.keymap.set("n", "?", "<cmd>help netrw-quickmap<CR>")
+		vim.keymap.set("n", "<Esc><Esc>", "<cmd>bnext<CR>")
 	end
 })
 

@@ -62,6 +62,8 @@ return require('packer').startup(function(use)
 	use {'ellisonleao/gruvbox.nvim'}
 	use {'CreaturePhil/vim-handmade-hero'}
 
+	use {'nvim-lualine/lualine.nvim'}
+
 	use {'chrisbra/Colorizer'}
 
 	use {'tpope/vim-surround'}

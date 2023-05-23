@@ -1,6 +1,3 @@
-local bind = vim.keymap.set
-local opts = {noremap = true}
-
 require("trouble").setup {
 	icons = false,
 	fold_open = "v",
@@ -15,5 +12,6 @@ require("trouble").setup {
 	},
 }
 
-bind('n', '<leader>q', '<cmd>TroubleToggle document_diagnostics<CR>', opts)
-bind('n', '<leader>qw', '<cmd>TroubleToggle workspace_diagnostics<CR>', opts)
+local opts = {noremap = true}
+vim.keymap.set('n', '<leader>q', '<cmd>TroubleToggle document_diagnostics<CR>', opts)
+vim.keymap.set('n', '<leader>qw', '<cmd>TroubleToggle workspace_diagnostics<CR>', opts)
