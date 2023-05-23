@@ -25,4 +25,4 @@ Start neovim and run `:PackerSync`.
 
 
 
-[Keybindings](https://github.com/thimc/nvim/keybindings.md).
+[Keybindings](https://raw.githubusercontent.com/thimc/nvim/main/keybindings.md).
