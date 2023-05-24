@@ -52,6 +52,8 @@ gl		show diagnostics in floating window
 <C-SPACE>	Trigger completion menu
 <C-f>		jump forward (luasnip)
 <C-b>		jump backward (luasnip)
+<C-u>       scroll up documentation
+<C-d>       scroll down documentation
 ```
 
 ## Git (Fugitive)
@@ -82,3 +84,4 @@ gl		show diagnostics in floating window
 ```
 <leader>t	toggles a terminal
 ```
+

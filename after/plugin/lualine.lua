@@ -6,3 +6,4 @@ require("lualine").setup{
 		section_separators = "",
 	},
 }
+vim.opt.showmode = false

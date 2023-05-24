@@ -9,6 +9,8 @@ if vim.loop.os_uname().sysname == "Linux" then
 	require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 end
 
+lsp.setup_servers({'clangd'})
+
 lsp.on_attach(function(client, bufnr)
 	local opts = {noremap=true, buffer=bufnr}
 	lsp.default_keymaps(opts)
@@ -54,38 +56,32 @@ null_ls.setup({
 })
 
 -- Make sure you setup `cmp` after lsp-zero
-
 local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
-
 require('luasnip.loaders.from_vscode').lazy_load()
 
 cmp.setup({
 	sources = {
 		{name = 'path'},
-		{name = 'luasnip'},
 		{name = 'nvim_lsp'},
-		{name = 'buffer'},
+		{name = 'buffer', keyword_length = 3},
+		{name = 'luasnip', keyword_length = 2},
+	},
+	window = {
+		-- completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
 	},
 	mapping = {
-		-- `Enter` and `Ctrl-L' to confirm completion
 		['<CR>'] = cmp.mapping.confirm({select = false}),
-		['<C-l>'] = cmp.mapping.confirm({select = false}),
-
-		-- Ctrl+Space to trigger completion menu
 		['<C-Space>'] = cmp.mapping.complete(),
-
-		-- Navigate between snippet placeholder
 		['<C-f>'] = cmp_action.luasnip_jump_forward(),
 		['<C-b>'] = cmp_action.luasnip_jump_backward(),
 	}
 })
-
 cmp.setup.cmdline({'/', '?'}, {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = { {name = 'buffer'} }
 })
-
 cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
@@ -94,5 +90,3 @@ cmp.setup.cmdline(':', {
 		{name = 'cmdline'}
 	})
 })
-
-require("lspconfig").clangd.setup {}
