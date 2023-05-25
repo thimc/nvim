@@ -7,7 +7,7 @@ function runBuffer()
 		command = "rm a.out; clang -Wall -g " .. vim.fn.expand('%') .." && ./a.out"
 	elseif file_type == 'go' then
 		if string.match(file_name, '_test') then
-			command = "go test -v --race . -count=1"
+			command = "go test -v . --race -count=1"
 		else
 			command = "go run " .. vim.fn.expand('%')
 		end

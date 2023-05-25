@@ -8,7 +8,7 @@ vim.keymap.set("v", "K", "<cmd>m '<-2<CR>gv=gv")
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- split window and set focus
-vim.keymap.set("n", "<leader>v", "<C-w>v<C-w>l")
+vim.keymap.set("n", "<leader>v", ":vsplit<CR>:wincmd l<CR>")
 
 -- Tree explorer, basically nvimtree
 vim.keymap.set("n", "<leader>x", vim.cmd.Lex)
