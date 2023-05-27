@@ -1,7 +1,7 @@
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
-vim.g.netrw_liststyle = 3
+vim.g.netrw_liststyle = 4
 vim.g.netrw_altv = true	-- open splits to the right
 vim.g.netrw_preview = true -- preview split to the right
 
@@ -21,18 +21,16 @@ vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undodir/"
 vim.opt.undofile = true
 vim.g.undolevels = 10000
 
-vim.opt.updatetime = 50
 vim.opt.timeoutlen = 300
+vim.opt.relativenumber = false
+vim.opt.signcolumn = "no"
 
-vim.opt.relativenumber = true
-vim.opt.signcolumn = "yes"
-
--- Change directory to the current file when entering a buffer
-vim.api.nvim_create_autocmd("BufEnter", {
-	callback = function()
-		vim.cmd("silent! lcd %:p:h")
-	end
-})
+-- -- Change directory to the current file when entering a buffer
+-- vim.api.nvim_create_autocmd("BufEnter", {
+-- 	callback = function()
+-- 		vim.cmd("silent! lcd %:p:h")
+-- 	end
+-- })
 
 -- Remove line numbers and sign column in terminal mode
 vim.api.nvim_create_autocmd("TermOpen", {

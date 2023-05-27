@@ -1,15 +1,15 @@
-local lsp = require("lsp-zero").preset({})
+local lsp = require("lsp-zero").preset({'recommended'})
 
 if vim.loop.os_uname().sysname == "Linux" then
 	lsp.ensure_installed({
 		"clangd",
 		"gopls",
-		"lua-language-server",
+		"lua_ls",
 	})
 	require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+else
+	lsp.setup_servers({'clangd'})
 end
-
-lsp.setup_servers({'clangd'})
 
 lsp.on_attach(function(client, bufnr)
 	local opts = {noremap=true, buffer=bufnr}
@@ -17,32 +17,25 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
 	vim.keymap.set('n', "<leader>ca", vim.lsp.buf.code_action, opts)
 	vim.keymap.set({'n','i'}, '<C-k>', vim.lsp.buf.signature_help, opts)
+	-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 end)
 
-lsp.set_sign_icons({
-	error = 'E',
-	warn = 'W',
-	hint = 'H',
-	info = 'I'
-})
 
-lsp.setup()
-
-vim.diagnostic.config({
-	signs = true,
-	virtual_text = false,
-	underline = false,
-	severity_sort = true,
-})
+-- vim.diagnostic.config({
+-- 	signs = false,
+-- })
 
 lsp.format_on_save({
 	format_opts = {
+		async = false,
 		timeout_ms = 10000,
 	},
 	servers = {
 		['null-ls'] = {'go'}
 	},
 })
+
+lsp.setup()
 
 local null_ls = require("null-ls")
 null_ls.setup({

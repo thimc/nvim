@@ -11,8 +11,7 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<leader>v", ":vsplit<CR>:wincmd l<CR>")
 
 -- Tree explorer, basically nvimtree
-vim.keymap.set("n", "<leader>x", vim.cmd.Lex)
-vim.keymap.set("n", "<leader>X", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>x", vim.cmd.Ex)
 
 -- Searching but keep the mouse in the middle of the screen
 vim.keymap.set("n", "n", "nzzzv")

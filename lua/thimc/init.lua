@@ -12,19 +12,11 @@ return require('packer').startup(function(use)
 	}
 
 	use {
-		'lewis6991/gitsigns.nvim',
-		config = function()
-			require('gitsigns').setup()
-		end,
-	}
-
-	use {
 		'nvim-treesitter/nvim-treesitter',
 		run = function()
-			local ts_update = require('nvim-treesitter.install').update({
+			require('nvim-treesitter.install').update({
 				with_sync = true
 			})
-			ts_update()
 		end,
 	}
 
@@ -60,8 +52,8 @@ return require('packer').startup(function(use)
 	}
 
 	use {'ellisonleao/gruvbox.nvim'}
+	use {'jhlgns/naysayer88.vim'}
 	use {'CreaturePhil/vim-handmade-hero'}
-
 	use {'nvim-lualine/lualine.nvim'}
 
 	use {'chrisbra/Colorizer'}
