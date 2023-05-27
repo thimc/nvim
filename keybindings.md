@@ -4,8 +4,7 @@ Here is a some what organized list of all my custom keybindings that I tend to u
 
 ```
 <leader>v	split window and set focus to the right split
-<leader>x	opens netrw in a left split, like a tree viewer
-<leader>X	opens netrw in full screen
+<leader>x	opens netrw
 <leader>s	append swedish mail signature
 <leader>S	append swedish english signature
 <leader>se	spellcheck US english
