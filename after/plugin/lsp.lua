@@ -1,14 +1,10 @@
 local lsp = require("lsp-zero").preset({'recommended'})
 
 if vim.loop.os_uname().sysname == "Linux" then
-	lsp.ensure_installed({
-		"clangd",
-		"gopls",
-		"lua_ls",
-	})
+	lsp.ensure_installed({'clangd', 'gopls', 'lua_ls'})
 	require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 else
-	lsp.setup_servers({'clangd'})
+	lsp.use({'clangd'})
 end
 
 lsp.on_attach(function(client, bufnr)
@@ -18,12 +14,16 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set('n', "<leader>ca", vim.lsp.buf.code_action, opts)
 	vim.keymap.set({'n','i'}, '<C-k>', vim.lsp.buf.signature_help, opts)
 	-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+	vim.api.nvim_create_autocmd('BufWritePre', {
+		buffer = bufnr,
+		callback = function()
+			vim.lsp.buf.code_action({
+				triggerKind = 'source.organizeImports',
+				apply = true
+			})
+		end,
+	})
 end)
-
-
--- vim.diagnostic.config({
--- 	signs = false,
--- })
 
 lsp.format_on_save({
 	format_opts = {
@@ -31,7 +31,8 @@ lsp.format_on_save({
 		timeout_ms = 10000,
 	},
 	servers = {
-		['null-ls'] = {'go'}
+		-- ['gopls'] = {'go'},
+		['null-ls'] = {'go'},
 	},
 })
 
@@ -41,10 +42,10 @@ local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
 		null_ls.builtins.formatting.gofumpt,
+		null_ls.builtins.formatting.gofmt,
 		null_ls.builtins.formatting.goimports_reviser,
-		null_ls.builtins.formatting.golines,
+		-- null_ls.builtins.formatting.golines,
 		null_ls.builtins.code_actions.shellcheck,
-		null_ls.builtins.completion.luasnip,
 	},
 })
 
