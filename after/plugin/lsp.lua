@@ -13,16 +13,7 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
 	vim.keymap.set('n', "<leader>ca", vim.lsp.buf.code_action, opts)
 	vim.keymap.set({'n','i'}, '<C-k>', vim.lsp.buf.signature_help, opts)
-	-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
-	vim.api.nvim_create_autocmd('BufWritePre', {
-		buffer = bufnr,
-		callback = function()
-			vim.lsp.buf.code_action({
-				triggerKind = 'source.organizeImports',
-				apply = true
-			})
-		end,
-	})
+	vim.keymap.set('n', '<leader>k', vim.diagnostic.setloclist, opts)
 end)
 
 lsp.format_on_save({
@@ -34,6 +25,10 @@ lsp.format_on_save({
 		-- ['gopls'] = {'go'},
 		['null-ls'] = {'go'},
 	},
+})
+
+vim.diagnostic.config({
+	virtual_text = false,
 })
 
 lsp.setup()

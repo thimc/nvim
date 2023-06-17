@@ -18,7 +18,6 @@ Install `go-tools`, `xclip`, `gopls`, `ripgrep` and `clangd`.
 go install github.com/incu6us/goimports-reviser@latest
 go install mvdan.cc/gofumpt@latest
 go install github.com/segmentio/golines@latest
-go install github.com/go-delve/delve/cmd/dlv@latest
 ```
 
 Start neovim and run `:PackerSync`.

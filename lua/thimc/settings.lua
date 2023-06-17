@@ -1,17 +1,10 @@
-vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
-vim.g.netrw_liststyle = 4
-vim.g.netrw_altv = true	-- open splits to the right
-vim.g.netrw_preview = true -- preview split to the right
 
 vim.opt.wrap = false
 vim.opt.title = true
-vim.opt.mouse = "a"
 vim.opt.clipboard = "unnamedplus" -- Sync with system clipboard
 
 vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 
@@ -22,15 +15,7 @@ vim.opt.undofile = true
 vim.g.undolevels = 10000
 
 vim.opt.timeoutlen = 300
-vim.opt.relativenumber = false
 vim.opt.signcolumn = "no"
-
--- -- Change directory to the current file when entering a buffer
--- vim.api.nvim_create_autocmd("BufEnter", {
--- 	callback = function()
--- 		vim.cmd("silent! lcd %:p:h")
--- 	end
--- })
 
 -- Remove line numbers and sign column in terminal mode
 vim.api.nvim_create_autocmd("TermOpen", {
@@ -58,6 +43,20 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 		  vim.cmd("normal! g`\"")
 		end
 	end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		local file = vim.fn.expand('%')
+		local match = file:match("%Mail/Outbox")
+		if match then
+			vim.api.nvim_win_set_option(0, "spell", true)
+			vim.api.nvim_win_set_option(0, "colorcolumn", "80")
+			vim.api.nvim_buf_set_option(0, "textwidth", 80)
+			vim.opt.textwidth = 80
+			vim.api.nvim_win_set_option(0, "wrap", true)
+		end
+	end
 })
 
 -- Enable spellcheck for markdown files, git/cvs commits and mails

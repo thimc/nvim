@@ -1,24 +1,19 @@
-
-## Keybindings
-Here is a some what organized list of all my custom keybindings that I tend to use.
-
+# Keybindings
 ```
 <leader>v	split window and set focus to the right split
-<leader>x	opens netrw
+<leader>h	shift focus to left window
+<leader>l	shift focus to right window
+<leader>d	open netrw
 <leader>s	append swedish mail signature
 <leader>S	append swedish english signature
 <leader>se	spellcheck US english
 <leader>ss	spellcheck swedish
 <leader>ch	highlight color codes
 ```
-### Terminal
+
+## Terminal
 ```
-<ESC>		exit out of terminal mode
-```
-### Netrw
-```
-<?>		display netrw-quickmap
-<ESC><ESC>	exit out of netrw
+<ESC>		exit terminal mode
 ```
 
 ## LSP (defaults from lsp-zero)
@@ -26,29 +21,31 @@ Here is a some what organized list of all my custom keybindings that I tend to u
 K		display hover information
 gd		jump to definition
 gD		jump to declaration
-gi		list all implementations
+gi		jump or list all implementations
 go		jump to symbol implementation
-gr		find all references
+gr		jump or find all references
 gs		display signature
-<F2>    	rename symbol
-<F3>    	format buffer
-<F4>    	code action
+<F2>    rename symbol
+<F3>    format buffer
+<F4>    code action
 gl		show diagnostics in floating window
 ]d		next diagnostic
 [d		prev diagnostic
 ```
+
 ### Custom LSP keybindings:
 ```
 <leader>rn	rename symbol
 <leader>ca	code action
 <C-k>		signature help (insert mode)
+<leader>k	open vim diagnostic loclist
 ```
 
 ## Completion
 ```
-<CR>		Confirm
-<C-l>		Confirm
-<C-SPACE>	Trigger completion menu
+<CR>		confirm
+<C-l>		confirm
+<C-SPACE>	trigger completion
 <C-f>		jump forward (luasnip)
 <C-b>		jump backward (luasnip)
 <C-u>       scroll up documentation
@@ -57,7 +54,7 @@ gl		show diagnostics in floating window
 
 ## Git (Fugitive)
 ```
-<leader>g	Launch fugitive
+<leader>g	launch fugitive
 ```
 
 ## Telescope
@@ -76,7 +73,7 @@ gl		show diagnostics in floating window
 
 ## Code runner (custom)
 ```
-<leader>z	run buffer/project depending on the file type and file name
+<leader>z	run buffer/project
 ```
 
 ## Toggle terminal (custom)
